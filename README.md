@@ -1,3 +1,4 @@
+<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Usage
 
 Creates an IAM Role for reading from any Kinesis stream in the account.
@@ -75,14 +76,30 @@ This project constitutes a work of the United States Government and is not subje
 
 | Name | Version |
 |------|---------|
-| terraform | >= 0.12 |
-| aws | >= 2.55.0 |
+| terraform | >= 0.13 |
+| aws | ~> 3.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | >= 2.55.0 |
+| aws | ~> 3.0 |
+
+## Modules
+
+No Modules.
+
+## Resources
+
+| Name |
+|------|
+| [aws_caller_identity](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) |
+| [aws_iam_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) |
+| [aws_iam_policy_document](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) |
+| [aws_iam_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) |
+| [aws_iam_role_policy_attachment](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) |
+| [aws_partition](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/partition) |
+| [aws_region](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region) |
 
 ## Inputs
 
@@ -90,7 +107,7 @@ This project constitutes a work of the United States Government and is not subje
 |------|-------------|------|---------|:--------:|
 | assume\_role\_policy | The assume role policy for the AWS IAM role.  If blank, allows any principal in the account to assume the role. | `string` | `""` | no |
 | name | The name of the AWS IAM role. | `string` | n/a | yes |
-| streams | The ARNs of the streams the role is allowed to read from.  Use ["\*"] to allow all streams. | `list(string)` | n/a | yes |
+| streams | The ARNs of the streams the role is allowed to read from.  Use ["*"] to allow all streams. | `list(string)` | n/a | yes |
 | tags | Tags applied to the AWS IAM role. | `map(string)` | `{}` | no |
 
 ## Outputs
@@ -99,4 +116,4 @@ This project constitutes a work of the United States Government and is not subje
 |------|-------------|
 | arn | The Amazon Resource Name (ARN) of the AWS IAM Role. |
 | name | The name of the AWS IAM Role. |
-
+<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
