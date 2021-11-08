@@ -99,17 +99,34 @@ resource "aws_iam_role" "main" {
 }
 
 data "aws_iam_policy_document" "main" {
-  statement {
-    sid = "ReadInputStream"
-    actions = [
-      "kinesis:DescribeStream",
-      "kinesis:GetRecords",
-      "kinesis:GetShardIterator",
-      "kinesis:ListShards"
-    ]
-    effect    = "Allow"
-    resources = var.streams
+
+  dynamic "statement" {
+    for_each = var.allow_list_streams ? [1] : []
+    content {
+      sid = "AllowListStreams"
+      actions = [
+        "kinesis:ListStreams"
+      ]
+      effect    = "Allow"
+      resources = ["*"]
+    }
   }
+
+  dynamic "statement" {
+    for_each = length(var.streams) > 0 ? [1] : []
+    content {
+      sid = "ReadStreams"
+      actions = [
+        "kinesis:DescribeStream",
+        "kinesis:GetRecords",
+        "kinesis:GetShardIterator",
+        "kinesis:ListShards"
+      ]
+      effect    = "Allow"
+      resources = var.streams
+    }
+  }
+
 }
 
 resource "aws_iam_policy" "main" {
